@@ -47,20 +47,68 @@ const array = [
 
 const checkRequired = function(input, message) {
   if(input.value.trim()) {
-    successMsg(input);
+    // successMsg(input);
   }
   else {
     showError(input, `${message}`);
   }
 }
 
+const validateInput = function(input, message, min, max) {
+
+  if (input.value.trim().length < min) {
+    showError(input, `${message} should be at least ${min} character`);
+  }
+  else if (input.value.trim().length > max){
+    showError(input, `${message} should be less then ${max} character`);
+  }
+  else {
+    successMsg(input);
+  }
+}
+
+function isEmailAddress(str) {
+  var pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return pattern.test(str);  // returns a boolean 
+}
+
+const validateEmail = function(input) {
+  if (isEmailAddress(input.value.trim())) {
+    successMsg(input)
+  }
+  else{
+    showError(input, "Email in proper format")
+  }
+}
+
+const validateConfirmPassword = function(input1, input2) {
+  
+  if(input2.value.trim() === "") {
+    showError(input2, "Confirm Password is empty")
+  }
+  else if (input1.value.trim() === input2.value.trim()) {
+    successMsg(input2)
+  }
+  else {
+    showError(input2, "Password and Confirm Password not match")
+  }
+} 
 
 formEl.addEventListener('submit', function (event) {
   event.preventDefault();
+  // debugger;
   
   for (let i = 0; i < array.length; i++) {
     input = array[i].input;
     message = array[i].message;
     checkRequired(input, message);
   }
+
+  validateInput(userNameInput, "Username", 6, 16);
+  validateInput(passwordInput, "Password", 5, 10);
+  validateEmail(emailInput);
+  validateConfirmPassword(passwordInput, confirmPasswordInput);
+
+
+  
 })
