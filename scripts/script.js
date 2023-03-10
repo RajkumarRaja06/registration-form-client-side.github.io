@@ -26,35 +26,41 @@ function successMsg(input) {
   errorEl.classList.remove('error-msg');
 }
 
+const array = [
+  {
+    input : userNameInput,
+    message :"Username is Mandatory"
+  },
+  {
+    input : emailInput,
+    message :"Email is Mandatory"
+  },
+  {
+    input : passwordInput,
+    message :"Password is Mandatory"
+  },
+  {
+    input : confirmPasswordInput,
+    message :"Confirm Password is Mandatory"
+  }
+]
+
+const checkRequired = function(input, message) {
+  if(input.value.trim()) {
+    successMsg(input);
+  }
+  else {
+    showError(input, `${message}`);
+  }
+}
+
+
 formEl.addEventListener('submit', function (event) {
   event.preventDefault();
-  const userName = userNameInput.value.trim();
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
-  const confirmPassword = confirmPasswordInput.value.trim();
-
-  if(userName){
-    successMsg(userNameInput)
-
-  }else{
-    showError(userNameInput, "Username is Mandatory")
-  }
-
-  if(email){
-    successMsg(emailInput)
-  }else{
-    showError(emailInput, "Email is Mandatory")
-  }
-
-  if(password){
-    successMsg(passwordInput)
-  }else{
-    showError(passwordInput, "Password is Mandatory")
-  }
-
-  if(confirmPassword){
-    successMsg(confirmPasswordInput)
-  }else{
-    showError(confirmPasswordInput, "Confirm Password is Mandatory")
+  
+  for (let i = 0; i < array.length; i++) {
+    input = array[i].input;
+    message = array[i].message;
+    checkRequired(input, message);
   }
 })
