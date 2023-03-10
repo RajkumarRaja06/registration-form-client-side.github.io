@@ -12,6 +12,7 @@
 }
 
 :root {
+  --clr--cherry :#d2042d;
   --clr-white: #ffffff;
   --clr-sky-blue: #8ecae6ff;
   --clr-blue-green: #219ebcff;
@@ -161,7 +162,7 @@ label {
 }
 
 .error {
-  color: red;
+  color: var(--clr--cherry);
   font-weight: 600;
   text-align: center;
   visibility: hidden;
