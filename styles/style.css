@@ -165,7 +165,7 @@ label {
   font-weight: 600;
   text-align: center;
   visibility: hidden;
-  word-spacing: 1rem;
+  word-spacing: 0.2rem;
 }
 
 .error-msg {
